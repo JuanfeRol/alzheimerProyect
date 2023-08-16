@@ -10,7 +10,7 @@ import (
 )
 
 // GetUserByID obtiene un usuario por su ID
-func GetUserByID(c *gin.Context, db *gorm.DB, userID int64) {
+func GetUserByID(c *gin.Context, db *gorm.DB, userID uint64) {
 	var user models.User
 	result := db.First(&user, userID)
 	if result.Error != nil {
@@ -39,7 +39,7 @@ func CreateUser(c *gin.Context, db *gorm.DB) {
 }
 
 // UpdateUser actualiza un usuario existente
-func UpdateUser(c *gin.Context, db *gorm.DB, userID int64) {
+func UpdateUser(c *gin.Context, db *gorm.DB, userID uint64) {
 	var user models.User
 	result := db.First(&user, userID)
 	if result.Error != nil {
@@ -62,7 +62,7 @@ func UpdateUser(c *gin.Context, db *gorm.DB, userID int64) {
 }
 
 // DeleteUser elimina un usuario por su ID
-func DeleteUser(c *gin.Context, db *gorm.DB, userID int64) {
+func DeleteUser(c *gin.Context, db *gorm.DB, userID uint64) {
 	result := db.Delete(&models.User{}, userID)
 	if result.Error != nil {
 		c.JSON(http.StatusInternalServerError, gin.H{"error": result.Error.Error()})
