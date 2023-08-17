@@ -29,11 +29,18 @@ func CreateUser(c *gin.Context, db *gorm.DB) {
 		return
 	}
 
+	if err := newUser.SetPassword(newUser.Password); err != nil {
+		c.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
+		return
+	}
+
 	result := db.Create(&newUser)
 	if result.Error != nil {
 		c.JSON(http.StatusInternalServerError, gin.H{"error": result.Error.Error()})
 		return
 	}
+
+	newUser.Password = ""
 
 	c.JSON(http.StatusOK, gin.H{"data": newUser})
 }
@@ -52,11 +59,18 @@ func UpdateUser(c *gin.Context, db *gorm.DB, userID uint64) {
 		return
 	}
 
+	if err := user.SetPassword(user.Password); err != nil {
+		c.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
+		return
+	}
+
 	result = db.Save(&user)
 	if result.Error != nil {
 		c.JSON(http.StatusInternalServerError, gin.H{"error": result.Error.Error()})
 		return
 	}
+
+	user.Password = ""
 
 	c.JSON(http.StatusOK, gin.H{"data": user})
 }
