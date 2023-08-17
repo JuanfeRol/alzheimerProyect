@@ -7,10 +7,10 @@ import (
 
 type User struct {
 	gorm.Model
-	Name     string `gorm:"column:name"`
+	Name     string `gorm:"column:name" json:"name"`
 	LastName string `gorm:"column:last_name" json:"last_name"`
-	Email    string `gorm:"unique;column:email"`
-	Password string `gorm:"column:password"`
+	Email    string `gorm:"unique;column:email" json:"email"`
+	Password string `gorm:"column:password" json:"password"`
 }
 
 // SetPassword cifra y establece la contraseña del usuario
