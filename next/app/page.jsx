@@ -60,6 +60,17 @@ export default function SignIn() {
             autoComplete="email"
             autoFocus
           />
+          
+          <TextField
+            margin="normal"
+            type="password"
+            fullWidth
+            id="email"
+            label="Contraseña"
+            autoComplete="email"
+            autoFocus
+            
+          />
 
           <Button
             type="submit"
