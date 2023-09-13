@@ -14,16 +14,17 @@ import Button from '@mui/material/Button';
 import Tooltip from '@mui/material/Tooltip';
 import MenuItem from '@mui/material/MenuItem';
 import AdbIcon from '@mui/icons-material/Adb';
-import { useRouter } from 'next/router';
-import { useNavigation } from 'next/navigation';
+import { useRouter } from 'next/navigation';
 
 
-const pages = ['Products', 'Pricing', 'Blog'];
+const pages = ['News', 'About Us', 'Contact'];
 const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
 
 function ResponsiveAppBar() {
+  const router = useRouter();
   const [anchorElNav, setAnchorElNav] = ([]);
   const [anchorElUser, setAnchorElUser] = ([]);
+  const logged = false;
 
   const handleOpenNavMenu = (event) => {
     setAnchorElNav(event.currentTarget);
@@ -31,23 +32,22 @@ function ResponsiveAppBar() {
   const handleOpenUserMenu = (event) => {
     setAnchorElUser(event.currentTarget);
   };
-  const navigation = useNavigation();
+
 
   const handleCloseNavMenu = () => {
-    navigation.navigate("/home/info");
+    router.push('/home/info');
   };
 
   const handleCloseUserMenu = () => {
     setAnchorElUser(null);
   };
 
-  const router = useRouter();
-
   return (
-    <AppBar position="static">
+    <AppBar position="static" sx={{
+      backgroundColor: '#888888',
+    }}>
       <Container maxWidth="xl">
         <Toolbar disableGutters>
-          <AdbIcon sx={{ display: { xs: 'none', md: 'flex' }, mr: 1 }} />
           <Typography
             variant="h6"
             noWrap
@@ -58,12 +58,11 @@ function ResponsiveAppBar() {
               display: { xs: 'none', md: 'flex' },
               fontFamily: 'monospace',
               fontWeight: 700,
-              letterSpacing: '.3rem',
-              color: 'inherit',
+              color: "#000000",
               textDecoration: 'none',
             }}
           >
-            LOGO
+            ALZ
           </Typography>
 
           <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
@@ -97,12 +96,12 @@ function ResponsiveAppBar() {
             >
               {pages.map((page) => (
                 <MenuItem key={page} onClick={handleCloseNavMenu}>
-                  <Typography textAlign="center">{page}</Typography>
+                  <Typography textAlign="center" ss>{page}</Typography>
                 </MenuItem>
               ))}
             </Menu>
           </Box>
-          <AdbIcon sx={{ display: { xs: 'flex', md: 'none' }, mr: 1 }} />
+          {/* Responsive design */}
           <Typography
             variant="h5"
             noWrap
@@ -114,12 +113,11 @@ function ResponsiveAppBar() {
               flexGrow: 1,
               fontFamily: 'monospace',
               fontWeight: 700,
-              letterSpacing: '.3rem',
               color: 'inherit',
               textDecoration: 'none',
             }}
           >
-            LOGO
+            ALZ
           </Typography>
           <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
             {pages.map((page) => (
@@ -132,7 +130,8 @@ function ResponsiveAppBar() {
               </Button>
             ))}
           </Box>
-
+          { /* Avatar */}
+          {logged ? (
           <Box sx={{ flexGrow: 0 }}>
             <Tooltip title="Open settings">
               <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
@@ -162,6 +161,7 @@ function ResponsiveAppBar() {
               ))}
             </Menu>
           </Box>
+          ) : ( <p>Not logged</p> ) }
         </Toolbar>
       </Container>
     </AppBar>

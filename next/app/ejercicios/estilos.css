@@ -1,0 +1,14 @@
+.parrafo-azul {
+    color: white;
+    background-color: #4B22F4;
+    border-radius: 20px;
+    padding: 3px;
+    font-family: var(--font-mono);
+}
+
+.boton {
+    padding-left: 10px;
+    padding-right: 10px;
+    border: 0 none;
+    font-size: 20px;
+}
