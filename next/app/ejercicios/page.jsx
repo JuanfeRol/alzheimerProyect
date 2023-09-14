@@ -1,9 +1,10 @@
 import React from 'react'
 import styles from './estilos.css'
 
+
 export default function page() {
   return (
-    <div>
+    <div className='primer-block'>
         <h1>Stay tuned for the <i className='parrafo-azul'>latest updates</i></h1>
         <h2>on Alzheimer's recent discoveries</h2>
         <p>Enter your email to be up to date</p>

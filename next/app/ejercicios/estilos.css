@@ -1,9 +1,23 @@
+body{
+    background-color: FBFBFB;
+}
+
+.primer-block{
+    margin-top: 5rem;
+    text-align: center;
+}
+
+h1{
+    font-size: 36px;
+}
+
 .parrafo-azul {
     color: white;
     background-color: #4B22F4;
     border-radius: 20px;
     padding: 3px;
     font-family: var(--font-mono);
+    font-size: 26px;
 }
 
 .boton {
