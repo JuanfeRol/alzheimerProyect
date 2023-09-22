@@ -44,7 +44,7 @@ function ResponsiveAppBar() {
 
   return (
     <AppBar position="static" sx={{
-      backgroundColor: '#888888',
+      backgroundColor: '#EFEFEF',
     }}>
       <Container maxWidth="xl">
         <Toolbar disableGutters>
@@ -72,7 +72,7 @@ function ResponsiveAppBar() {
               aria-controls="menu-appbar"
               aria-haspopup="true"
               onClick={handleOpenNavMenu}
-              color="inherit"
+              color="black"
             >
               <MenuIcon />
             </IconButton>
@@ -113,7 +113,7 @@ function ResponsiveAppBar() {
               flexGrow: 1,
               fontFamily: 'monospace',
               fontWeight: 700,
-              color: 'inherit',
+              color: '#000000',
               textDecoration: 'none',
             }}
           >
@@ -124,7 +124,7 @@ function ResponsiveAppBar() {
               <Button
                 key={page}
                 onClick={handleCloseNavMenu}
-                sx={{ my: 2, color: 'white', display: 'block' }}
+                sx={{ my: 2, color: 'black', display: 'block' }}
               >
                 {page}
               </Button>
@@ -161,7 +161,8 @@ function ResponsiveAppBar() {
               ))}
             </Menu>
           </Box>
-          ) : ( <p>Not logged</p> ) }
+          ) : ( <p style={{ color: 'black' }}>Not logged</p> ) }
+          
         </Toolbar>
       </Container>
     </AppBar>
