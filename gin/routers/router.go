@@ -26,6 +26,7 @@ func SetupRouter(dataBase *gorm.DB) *gin.Engine {
 	api.DELETE("/user/:id", controllers.DeleteUserHandler(services.DeleteUser, dataBase))
 
 	SendRouter(router)
+	UseScrapping(router)
 
 	// Retorna Gin
 	return router
