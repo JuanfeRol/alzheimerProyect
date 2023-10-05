@@ -7,10 +7,11 @@ import (
 type Publication struct {
 	gorm.Model
 	Title       string `gorm:"column:title" json:"title"`
-	Description string `gorm:"column:description" json:"description"`
+	Description string `gorm:"column:description" json:"description"` // to-do: Gtp will make the description
 	Abstract    string `gorm:"column:abstract" json:"abstract"`
-	GPTAbstract string `gorm:"column:gpt_abstract" json:"gpt_abstract"`
 	DOI         string `gorm:"column:doi" json:"doi"`
+	DOILink     string `gorm:"column:doi_link" json:"doi_link"`
+	Body        string `gorm:"column:body" json:"body"` // final body to send
 }
 
 // GetPublications obtiene todas las publicaciones
@@ -35,11 +36,18 @@ func GetPublicationByID(db *gorm.DB, id int) (*Publication, error) {
 
 // CreatePublication crea una nueva publicación
 func CreatePublication(db *gorm.DB, publication Publication) (*Publication, error) {
-	err := db.Create(&publication).Error
+	// Compare title to know if the publication exists
+	var publicationExists Publication
+	err := db.Where("title = ?", publication.Title).First(&publicationExists).Error
 	if err != nil {
-		return nil, err
+		err = db.Create(&publication).Error
+		if err != nil {
+			return nil, err
+		}
+
+		return &publication, nil
 	}
-	return &publication, nil
+	return &publicationExists, nil
 }
 
 // UpdatePublication actualiza una publicación
