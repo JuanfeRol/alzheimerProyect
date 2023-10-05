@@ -39,6 +39,7 @@ func SetupDatabase() *gorm.DB {
 
 	// Se cargan los modelos en la base de datos
 	dataBase.AutoMigrate(&models.User{})
+	dataBase.AutoMigrate(&models.Publication{})
 
 	// Se retorna la base de datos
 	return dataBase

@@ -7,9 +7,10 @@ import (
 
 	"github.com/PuerkitoBio/goquery"
 	"github.com/gin-gonic/gin"
+	"gorm.io/gorm"
 )
 
-func UseScrapping(router *gin.Engine) {
+func ScrappingEndpoint(router *gin.RouterGroup, dataBase *gorm.DB) {
 	send := router.Group("/use")
 
 	send.GET("/scrapper", func(c *gin.Context) {
