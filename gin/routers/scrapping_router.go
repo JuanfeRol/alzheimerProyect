@@ -43,8 +43,9 @@ func ScrappingEndpoint(router *gin.RouterGroup, dataBase *gorm.DB) {
 		// Encuentra los elementos HTML que contienen los datos que deseas extraer
 		document.Find(".docsum-content").Each(func(index int, element *goquery.Selection) {
 			// Extrae el título y el enlace de cada resultado
-			title := element.Find(".docsum-title").Text()
-			title = utils.CleanString(title, false)
+			title := element.Find(".docsum-title").Text() // obtener string
+			title = utils.CleanString(title, false)       // limpiarla
+			title = strings.TrimSpace(title)              // quitarle espacios iniciales y finales
 			link, _ := element.Find(".docsum-title").Attr("href")
 
 			// Imprime los datos extraídos
@@ -104,6 +105,7 @@ func ScrappingEndpoint(router *gin.RouterGroup, dataBase *gorm.DB) {
 				// Extrae el título y el enlace de cada resultado
 				abstract := element.Find(".abstract-content").Text()
 				abstract = utils.CleanString(abstract, false)
+				abstract = strings.TrimSpace(abstract)
 
 				exist := element.Find(".empty-abstract").Text()
 
@@ -115,6 +117,8 @@ func ScrappingEndpoint(router *gin.RouterGroup, dataBase *gorm.DB) {
 				fmt.Printf("Abstract: %s\n", abstract)
 
 				publication.Abstract = abstract
+
+				publication.Body = "Title: " + publication.Title + "\n\nDOI: " + publication.DOI + "\n\nAbstract: " + publication.Abstract + "\n\nVisit the link for more information: " + publication.DOILink
 
 				models.CreatePublication(dataBase, publication)
 			})

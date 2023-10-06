@@ -77,3 +77,12 @@ func GetPublicationsByTitle(db *gorm.DB, title string) (*[]Publication, error) {
 	}
 	return &publications, nil
 }
+
+func GetLastPublication(db *gorm.DB) (*Publication, error) {
+	var publication Publication
+	err := db.Last(&publication).Error
+	if err != nil {
+		return nil, err
+	}
+	return &publication, nil
+}

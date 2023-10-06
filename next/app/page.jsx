@@ -1,16 +1,47 @@
 "use client";
 
 import * as React from "react";
-import Avatar from "@mui/material/Avatar";
 import Button from "@mui/material/Button";
 import TextField from "@mui/material/TextField";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import { blue } from "@mui/material/colors";
+import { redirect } from "next/dist/server/api-utils";
 
 
 export default function SignIn() {
+  // Login
+  const [email, setEmail] = React.useState("");
+  const [password, setPassword] = React.useState("");
+
+  const handleLogin = () => {
+    fetch("http://localhost:8080/api/publications")
+      .then((res) => res.json())
+      .then((data) => console.log(data))
+      .catch((err) => console.log(err));
+
+    /*
+    const data = {
+      email: email,
+      password: password,
+    };
+    fetch("http://localhost:8080/api/send/email", {
+      method: "POST",
+      body: JSON.stringify(data),
+    }).then((res) => {
+        console.log(res);
+        if (res.status === 200) {
+          //localStorage.setItem("token", res.data.token);
+          //redirect("/news");
+        }
+      })
+      .catch((err) => console.log(err));
+
+    //redirect("/news");
+    */
+  };
+
   return (
     <Container component="main" maxWidth="xs">
       <Box
@@ -21,12 +52,12 @@ export default function SignIn() {
           alignItems: "center",
         }}
       >
-        <Avatar
-          alt="Icono de Pixis"
-          src="favicon.ico"
-          sx={{
+        <img
+          alt="icono"
+          src="/brain.png"
+          style={{
             marginY: "3rem",
-            bgcolor: "transparent",
+            backgroundColor: "transparent",
             width: "2.5rem",
             height: "2.5rem",
           }}
@@ -37,7 +68,7 @@ export default function SignIn() {
           fontWeight="bold"
           fontSize="1.5rem"
         >
-          Bienvenido
+          Bienvenido Usuario
         </Typography>
         <Typography
           color={blue[500]}
@@ -45,7 +76,7 @@ export default function SignIn() {
           fontWeight="bold"
           fontSize="1rem"
         >
-          Bienvenido
+          Alzheimer Project
         </Typography>
 
         <Box
@@ -73,9 +104,9 @@ export default function SignIn() {
           />
 
           <Button
-            type="submit"
             fullWidth
             variant="contained"
+            onClick={handleLogin}
             sx={{
               mt: "1rem",
               mb: "1rem",
