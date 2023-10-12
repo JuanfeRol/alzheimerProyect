@@ -1,3 +1,11 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;800&family=Raleway:wght@100;300;400;600;800&display=swap');
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+}
+
 body{
     background-color: FBFBFB;
 }
@@ -7,9 +15,14 @@ body{
     text-align: center;
 }
 
-h1{
+.primer-block h1{
     font-size: 36px;
 }
+
+.primer-block h2{
+    font-weight: 600;
+}
+
 
 .parrafo-azul {
     color: white;
@@ -25,4 +38,14 @@ h1{
     padding-right: 10px;
     border: 0 none;
     font-size: 20px;
+}
+
+form{
+    margin: 0 auto;
+    margin-top: 50px;
+    width: 50vw;
+}
+
+.segundo-bloque{
+    background-color: #4B22F4;
 }
