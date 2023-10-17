@@ -24,17 +24,39 @@ export default function page() {
             <button className='parrafo-azul boton'>Suscribe</button> 
           </form>
       </section>
-      <div className="curveado">
-        <img src="/img2.svg" alt="hhh"/> 
+      <div class="container_wave">
+        <svg viewBox="0 0 500 150" preserveAspectRatio="none">
+          <path d="M0.00,49.98 C127.25,169.25 311.23,-48.83 500.00,49.98 L500.00,150.00 L0.00,150.00 Z">
+          </path>
+        </svg>
       </div>
-
       <section className="segundo-bloque">
-        <div className='izquierda'>
-          <p><b>About 5.8 million in the United States who have alzheimer's disease </b></p>
-          <p>it accounts 60-80% of dementia cases</p>
+        <h2>What is alzheimer?</h2>
+        <hr />
+        <div className="content">
+          <div className='izquierda'>
+            <h2><b>About 5.8 million in the United States who have alzheimer's disease </b></h2>
+            <p>it accounts 60-80% of dementia cases</p>
+          </div>
+          <div className="derecha">
+            <p>Alzheimer's is a type of dementia that affects memory, thinking and behavior. Symptoms eventually grow severe enough to interfere with daily tasks. Alzheimer's is the most common cause of dementia, a general term for memory loss and other cognitive abilities serious enough to interfere with daily life.</p>
+          </div>
         </div>
-        <h3>What is alzheimer?</h3>
-        <p>Alzheimer's is a type of dementia that affects memory, thinking and behavior. Symptoms eventually grow severe enough to interfere with daily tasks. Alzheimer's is the most common cause of dementia, a general term for memory loss and other cognitive abilities serious enough to interfere with daily life.</p>
+      </section>
+
+      <section className="latest_news">
+        <h2>Latest News</h2>
+        <hr />
+        <div className="news_section">
+          <div className="card">
+            <p className="date">12 Jun 23</p>
+            <h3 className="new_title">How to sell drugs online</h3>
+          </div>
+          <div className="card">
+            <p className="date">12 Jun 23</p>
+            <h3 className="new_title">How to sell drugs online</h3>
+          </div>
+        </div>
       </section>
     </div>
     
