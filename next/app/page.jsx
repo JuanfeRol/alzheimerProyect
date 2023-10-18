@@ -11,6 +11,8 @@ import { redirect } from "next/dist/server/api-utils";
 
 
 export default function SignIn() {
+
+  window.localStorage.setItem('logged', false);
   // Login
   const [email, setEmail] = React.useState("");
   const [password, setPassword] = React.useState("");
@@ -20,6 +22,8 @@ export default function SignIn() {
       .then((res) => res.json())
       .then((data) => console.log(data))
       .catch((err) => console.log(err));
+
+    window.localStorage.setItem('logged', true);
 
     /*
     const data = {

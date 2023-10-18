@@ -24,7 +24,8 @@ function ResponsiveAppBar() {
   const router = useRouter();
   const [anchorElNav, setAnchorElNav] = ([]);
   const [anchorElUser, setAnchorElUser] = ([]);
-  const logged = false;
+  const logged = window.localStorage.getItem('logged');
+
 
   const handleOpenNavMenu = (event) => {
     setAnchorElNav(event.currentTarget);
@@ -131,7 +132,7 @@ function ResponsiveAppBar() {
             ))}
           </Box>
           { /* Avatar */}
-          {logged ? (
+          {logged==true ? (
           <Box sx={{ flexGrow: 0 }}>
             <Tooltip title="Open settings">
               <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
