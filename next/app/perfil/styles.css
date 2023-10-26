@@ -1,0 +1,15 @@
+.main{
+    align-items: center;
+    text-align: center;
+}
+
+h2{
+    background-color: #4B22F4;
+    color: white;
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+}
+
+p{
+    margin-top: .5rem;
+}

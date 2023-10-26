@@ -1,0 +1,51 @@
+:root{
+    --background-primary: #4B22F4;
+}
+
+.main{
+    align-items: center;
+    text-align: center;
+}
+
+h2{
+    background-color: #4B22F4;
+    color: white;
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+}
+/*Latest news*/
+.latest_news{
+    text-align: center;
+    margin-top: 2rem;
+}
+
+.latest_news>h2{
+    font-size: 2.5rem;
+}
+
+.latest_news>hr{
+    text-align: center;
+    width: 30%;
+    margin: 0 auto;
+    border: none; 
+    height: 6px;
+    background-color: var(--background-primary);
+}
+
+.news_section{
+    margin-top: 1rem;
+    display: flexbox;
+}
+
+.card{
+    text-align: start;
+    margin: 10px auto;
+    width: 400px;
+    height: 400px;
+    padding: 1rem;
+    color: #FBFBFB;
+    background-color: var(--background-primary);
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column-reverse;
+}
