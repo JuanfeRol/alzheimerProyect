@@ -2,50 +2,103 @@
     --background-primary: #4B22F4;
 }
 
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body{
+    width: 100%;
+    height: 100vh;
+    justify-content: center;
+    align-items: center;
+}
+
 .main{
+    width: 100%;
+    height: 100vh;
+    justify-content: center;
     align-items: center;
     text-align: center;
 }
 
 h2{
-    background-color: #4B22F4;
-    color: white;
+    /*background-color: #4B22F4;*)*/
+    color: black;
     padding-top: 1rem;
-    padding-bottom: 1rem;
+    padding-bottom: .2rem;
+    font-weight: 800;
+}
+
+hr{
+    text-align: center;
+    width: 50%;
+    margin: 0 auto;
+    border: none; 
+    height: 2px;
+    background-color: var(--background-primary);
 }
 /*Latest news*/
 .latest_news{
-    text-align: center;
-    margin-top: 2rem;
-}
-
-.latest_news>h2{
-    font-size: 2.5rem;
-}
-
-.latest_news>hr{
-    text-align: center;
-    width: 30%;
+    width: 100%;
+    max-width: 1100px;
     margin: 0 auto;
-    border: none; 
-    height: 6px;
-    background-color: var(--background-primary);
+    justify-content: center;
+}
+
+.first_card{
+    width: 100%;
+    margin: 20px auto;
+    border-radius: 6px;
+    overflow: hidden;
+    background-color: #fff;
+    box-shadow: 0px 1px 10px rgba(0, 0, 0, 0.2);
+    cursor: default;
+    transition: all 400ms ease;
 }
 
 .news_section{
-    margin-top: 1rem;
-    display: flexbox;
+    display: flex;
+    width: 100%;
+    box-sizing: border-box;
 }
 
 .card{
-    text-align: start;
-    margin: 10px auto;
-    width: 400px;
-    height: 400px;
-    padding: 1rem;
-    color: #FBFBFB;
-    background-color: var(--background-primary);
-    border-radius: 10px;
-    display: flex;
-    flex-direction: column-reverse;
+    width: 100%;
+    margin: 20px;
+    border-radius: 6px;
+    overflow: hidden;
+    background-color: #fff;
+    box-shadow: 0px 1px 10px rgba(0, 0, 0, 0.2);
+    cursor: default;
+    transition: all 400ms ease;
+}
+
+.card:hover , .first_card:hover{
+    box-shadow: 5px 5px 20px rgba(0, 0, 0, 0.4);
+    cursor: pointer;
+    transform: scale(1.05);
+}
+
+.first_card img{
+    width: 100%;
+    height: 350px;
+    object-fit: cover;
+}
+
+.card img{
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+}
+
+.card .contenido h3, .first_card .contenido h3{
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.card .contenido p, .first_card .contenido p{
+    line-height: 1.5;
+    color: #6a6a6a;
 }
