@@ -125,7 +125,7 @@ func MailEndpoint(router *gin.RouterGroup, dataBase *gorm.DB) {
 
 		// Configura el mensaje de correo
 		from := SMTP_ACC
-		to := []string{"crimsonpurgatorys@gmail.com"}
+		to := []string{"paolamprezram@gmail.com"}
 		subject := "New Alzheimer's publication!"
 		message := publication.Body
 

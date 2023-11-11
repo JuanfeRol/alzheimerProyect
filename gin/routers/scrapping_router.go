@@ -74,7 +74,7 @@ func ScrappingEndpoint(router *gin.RouterGroup, dataBase *gorm.DB) {
 
 			// Encuentra los DOI
 			found := false
-			document.Find(".identifier").Each(func(index int, element *goquery.Selection) {
+			document.Find(".doi").Each(func(index int, element *goquery.Selection) {
 				if found {
 					return
 				}

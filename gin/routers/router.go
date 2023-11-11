@@ -26,6 +26,7 @@ func SetupRouter(dataBase *gorm.DB) *gin.Engine {
 	MailEndpoint(api, dataBase)
 	ScrappingEndpoint(api, dataBase)
 	PublicationEndpoint(api, dataBase)
+	ChatgptEndpoint(api, dataBase)
 
 	// Retorna Gin
 	return router
