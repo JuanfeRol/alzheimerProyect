@@ -6,12 +6,15 @@ import styles from './estilos.css'
 
 
 export default function page() {
-  useEffect(() => {
-    fetch('http://127.0.0.1:8080/send/email')
-      .then((res) => res.json())
-      .then((data) => console.log(data))
-      .catch((error) => console.error("Error en la solicitud fetch:", error));
-  }, []);
+
+  const textField = React.useRef(null);
+
+  const handleSuscribe = (e) => {
+    e.preventDefault();
+    console.log(textField.current.value);
+    localStorage.setItem('email', textField.current.value);
+    window.location.href = '/register-form';
+  }
   
 
   return (
@@ -19,12 +22,12 @@ export default function page() {
       <section className='primer-block'>
           <h1>Stay tuned for the <br /><i className='parrafo-azul'>latest updates</i></h1>
           <h2>on Alzheimer's recent discoveries</h2>
-          <form action="">
-            <TextField fullWidth label="Enter your e-mail to be up to date" id="fullWidth" />  
-            <button className='parrafo-azul boton'>Suscribe</button> 
+          <form onSubmit={(event) => handleSuscribe(event)}>
+            <TextField fullWidth label="Enter your e-mail to be up to date" id="fullWidth" inputRef={textField}/>  
+            <button className='parrafo-azul boton' type='submit'>Suscribe</button> 
           </form>
       </section>
-      <div class="container_wave">
+      <div className="container_wave">
         <svg viewBox="0 0 500 150" preserveAspectRatio="none">
           <path d="M0.00,49.98 C127.25,169.25 311.23,-48.83 500.00,49.98 L500.00,150.00 L0.00,150.00 Z">
           </path>

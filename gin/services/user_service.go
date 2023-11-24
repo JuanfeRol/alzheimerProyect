@@ -21,6 +21,38 @@ func GetUserByID(c *gin.Context, db *gorm.DB, userID uint64) {
 	c.JSON(http.StatusOK, gin.H{"data": user})
 }
 
+// Login verifica las credenciales solo email y password
+func Login(c *gin.Context, db *gorm.DB, userEmail string, userPassword string) {
+	var user models.User
+	result := db.Where("email = ?", userEmail).First(&user)
+	if result.Error != nil {
+		c.JSON(http.StatusInternalServerError, gin.H{"error": result.Error.Error()})
+		return
+	}
+
+	if !user.CheckPassword(userPassword) {
+		c.JSON(http.StatusUnauthorized, gin.H{"error": "Invalid credentials"})
+		return
+	}
+
+	// cookie := http.Cookie{
+	// 	Name:     "user",
+	// 	Value:    user.Name,
+	// 	MaxAge:   3600,
+	// 	Path:     "/",
+	// 	Domain:   "localhost",
+	// 	Secure:   false,
+	// 	HttpOnly: false,
+	// 	SameSite: http.SameSiteLaxMode,
+	// }
+
+	// http.SetCookie(c.Writer, &cookie)
+	c.SetCookie("user", user.Name, 3600, "/", "", false, true)
+	// log.Println("Cookie", c.Request.Cookies())
+	// log.Println("Cookie", c.Request.Header.Get("Cookie"))
+	c.JSON(http.StatusOK, gin.H{"data": user})
+}
+
 // CreateUser crea un nuevo usuario
 func CreateUser(c *gin.Context, db *gorm.DB) {
 	var newUser models.User

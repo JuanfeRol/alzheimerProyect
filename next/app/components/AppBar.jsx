@@ -24,23 +24,33 @@ function ResponsiveAppBar() {
   const router = useRouter();
   const [anchorElNav, setAnchorElNav] = ([]);
   const [anchorElUser, setAnchorElUser] = ([]);
-  const logged = window.localStorage.getItem('logged');
+  const logged = true;
 
+  const handleNavMenu = (index) => {
+    if (index == 0) {
+      router.push('/news');
+    }
+
+    if (index == 1) {
+      router.push('/aboutus');
+    }
+
+    if (index == 2) {
+      router.push('/aboutus');
+    }
+  };
 
   const handleOpenNavMenu = (event) => {
-    setAnchorElNav(event.currentTarget);
-  };
-  const handleOpenUserMenu = (event) => {
-    setAnchorElUser(event.currentTarget);
   };
 
+  const handleOpenUserMenu = (event) => {
+    router.push('/perfil');
+  };
 
   const handleCloseNavMenu = () => {
-    router.push('/home/info');
   };
 
   const handleCloseUserMenu = () => {
-    setAnchorElUser(null);
   };
 
   return (
@@ -53,7 +63,7 @@ function ResponsiveAppBar() {
             variant="h6"
             noWrap
             component="a"
-            href="/"
+            href="/home"
             sx={{
               mr: 2,
               display: { xs: 'none', md: 'flex' },
@@ -95,8 +105,8 @@ function ResponsiveAppBar() {
                 display: { xs: 'block', md: 'none' },
               }}
             >
-              {pages.map((page) => (
-                <MenuItem key={page} onClick={handleCloseNavMenu}>
+              {pages.map((page, index) => (
+                <MenuItem key={page} onClick={() => handleNavMenu(index)}>
                   <Typography textAlign="center">{page}</Typography>
                 </MenuItem>
               ))}
@@ -121,10 +131,10 @@ function ResponsiveAppBar() {
             ALZ
           </Typography>
           <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
-            {pages.map((page) => (
+            {pages.map((page, index) => (
               <Button
                 key={page}
-                onClick={handleCloseNavMenu}
+                onClick={() => handleNavMenu(index)}
                 sx={{ my: 2, color: 'black', display: 'block' }}
               >
                 {page}
