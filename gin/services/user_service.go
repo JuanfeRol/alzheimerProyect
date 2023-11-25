@@ -1,7 +1,9 @@
 package services
 
 import (
+	"encoding/json"
 	"net/http"
+	"strconv"
 
 	"alzheimerProject/models"
 
@@ -35,22 +37,42 @@ func Login(c *gin.Context, db *gorm.DB, userEmail string, userPassword string) {
 		return
 	}
 
-	// cookie := http.Cookie{
-	// 	Name:     "user",
-	// 	Value:    user.Name,
-	// 	MaxAge:   3600,
-	// 	Path:     "/",
-	// 	Domain:   "localhost",
-	// 	Secure:   false,
-	// 	HttpOnly: false,
-	// 	SameSite: http.SameSiteLaxMode,
-	// }
+	type UserToSend struct {
+		ID       uint64 `json:"id"`
+		Name     string `json:"name"`
+		LastName string `json:"lastName"`
+		Email    string `json:"email"`
+	}
 
-	// http.SetCookie(c.Writer, &cookie)
-	c.SetCookie("user", user.Name, 3600, "/", "", false, true)
+	userToSend := UserToSend{
+		ID:       uint64(user.ID),
+		Name:     user.Name,
+		LastName: user.LastName,
+		Email:    user.Email,
+	}
+
+	jsonUserToSend, err := json.Marshal(userToSend)
+	if err != nil {
+		c.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
+		return
+	}
+
+	cookie := http.Cookie{
+		Name:     "user",
+		Value:    strconv.Itoa(int(user.ID)), // se debe usar un token en lugar del ID, pues el token almacenará el ID, el nombre, el apellido y el perfil del usuario
+		MaxAge:   3600,
+		Path:     "/",
+		Domain:   "",
+		Secure:   false,                // se deben usar certificados SSL
+		HttpOnly: false,                // false para acceder a document.cookie
+		SameSite: http.SameSiteLaxMode, // SameSiteNoneMode solo se puede usar con Secure=true
+	}
+
+	http.SetCookie(c.Writer, &cookie)
+	// c.SetCookie("user", user.Name, 3600, "/", "", false, true)
 	// log.Println("Cookie", c.Request.Cookies())
 	// log.Println("Cookie", c.Request.Header.Get("Cookie"))
-	c.JSON(http.StatusOK, gin.H{"data": user})
+	c.JSON(http.StatusOK, gin.H{"data": string(jsonUserToSend)})
 }
 
 // CreateUser crea un nuevo usuario

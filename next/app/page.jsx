@@ -7,22 +7,35 @@ import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import { blue } from "@mui/material/colors";
-import { redirect } from "next/dist/server/api-utils";
-import { parseCookie } from "next/dist/compiled/@edge-runtime/cookies";
 import { useRouter } from "next/navigation";
+import { useGlobalContext } from "./providers/GlobalContext";
 
 
 export default function SignIn() {
 
   const emailRef = React.useRef(null);
   const router = useRouter();
+  const { loggedIn, setGlobalLoggedIn } = useGlobalContext();
 
   React.useEffect(() => {
-    window.localStorage.setItem('logged', false);
-    if (window.localStorage.getItem('logged') === true) {
-      redirect("/news");
+    console.log("loggedIn: ", loggedIn);
+    let cookieValue = document.cookie;
+
+    if (cookieValue != '') {
+      cookieValue = document.cookie
+        .split('; ')
+        .find(row => row.startsWith('user'))
+        .split('=')[1];
+      
+      setGlobalLoggedIn(true);
+      console.log("cookieValue: ", cookieValue);
+      router.push('/news');
+    } else {
+      setGlobalLoggedIn(false);
     }
 
+    console.log("loggedIn: ", loggedIn);
+    
     let emailPrev = window.localStorage.getItem('email');
     if (emailPrev != null || emailPrev != undefined) {
       emailRef.current.value = emailPrev;
@@ -56,7 +69,12 @@ export default function SignIn() {
 
         return response.json();
       }).then(data => {
+        if (data == undefined) {
+          return;
+        }
+
         console.log("data: ",data);
+        setGlobalLoggedIn(true);
         router.push('/news');
       })
       .catch((error) => {

@@ -102,3 +102,13 @@ hr{
     line-height: 1.5;
     color: #6a6a6a;
 }
+
+.date{
+    margin-top: 1px;
+    margin-bottom: -4px;
+    color: #6a6a6a;
+}
+
+.category {
+    padding-bottom: 16px;
+}

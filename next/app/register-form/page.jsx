@@ -26,6 +26,18 @@ export default function page(){
   const router = useRouter();
 
   React.useEffect(() => {
+    let cookieValue = document.cookie;
+
+    if (cookieValue != '') {
+      cookieValue = document.cookie
+        .split('; ')
+        .find(row => row.startsWith('user'))
+        .split('=')[1];
+      
+      console.log("cookieValue: ", cookieValue);
+      router.push('/news');
+    }
+
     let emailPrev = window.localStorage.getItem('email');
     if (emailPrev != null || emailPrev != undefined) {
       emailRef.current.value = emailPrev;

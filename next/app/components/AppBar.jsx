@@ -13,8 +13,8 @@ import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
 import Tooltip from '@mui/material/Tooltip';
 import MenuItem from '@mui/material/MenuItem';
-import AdbIcon from '@mui/icons-material/Adb';
 import { useRouter } from 'next/navigation';
+import { useGlobalContext } from '../providers/GlobalContext';
 
 
 const pages = ['News', 'About Us', 'Contact'];
@@ -24,7 +24,23 @@ function ResponsiveAppBar() {
   const router = useRouter();
   const [anchorElNav, setAnchorElNav] = ([]);
   const [anchorElUser, setAnchorElUser] = ([]);
-  const logged = true;
+  const { loggedIn, setGlobalLoggedIn } = useGlobalContext();
+
+  React.useEffect(() => {
+    let cookieValue = document.cookie;
+
+    if (cookieValue != '') {
+      cookieValue = document.cookie
+        .split('; ')
+        .find(row => row.startsWith('user'))
+        .split('=')[1];
+
+      setGlobalLoggedIn(true);
+    } else {
+      setGlobalLoggedIn(false);
+    }
+    // console.log("globalLoggedIn: ", loggedIn);
+  }, []);
 
   const handleNavMenu = (index) => {
     if (index == 0) {
@@ -142,7 +158,7 @@ function ResponsiveAppBar() {
             ))}
           </Box>
           { /* Avatar */}
-          {logged==true ? (
+          {loggedIn===true ? (
           <Box sx={{ flexGrow: 0 }}>
             <Tooltip title="Open settings">
               <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
@@ -172,7 +188,7 @@ function ResponsiveAppBar() {
               ))}
             </Menu>
           </Box>
-          ) : ( <p style={{ color: 'black' }}>Not logged</p> ) }
+          ) : ( <p style={{ color: 'black' }}><a href='/'>Not logged</a></p> ) }
           
         </Toolbar>
       </Container>
