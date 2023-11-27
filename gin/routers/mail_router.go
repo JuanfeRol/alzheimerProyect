@@ -123,9 +123,24 @@ func MailEndpoint(router *gin.RouterGroup, dataBase *gorm.DB) {
 		smtpUser := SMTP_ACC
 		smtpPassword := SMTP_PASS
 
+		// Obtiene todos los usuarios
+		var users []models.User
+		result := dataBase.Find(&users)
+		if result.Error != nil {
+			c.JSON(http.StatusInternalServerError, gin.H{"error": result.Error.Error()})
+			return
+		}
+
+		// Crea un mapa de correos de los usuarios
+		var emails []string
+
+		for _, user := range users {
+			emails = append(emails, user.Email)
+		}
+
 		// Configura el mensaje de correo
 		from := SMTP_ACC
-		to := []string{"paolamprezram@gmail.com"}
+		to := emails
 		subject := "New Alzheimer's publication!"
 		message := publication.Body
 

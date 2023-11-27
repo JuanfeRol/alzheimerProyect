@@ -32,6 +32,49 @@ export default function page(){
         document.cookie = "user=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
         router.push('/');
     }
+
+    const handlePubs = () => {
+        fetch(`http://localhost:8080/api/use/scrapper`)
+            .then((res) => res.json())
+            .then((data) => {
+                console.log(data);
+                alert("Publicaciones obtenidas");
+            })
+            .catch((err) => console.log(err));
+    }
+
+    const handleSends = () => {
+        fetch(`http://localhost:8080/api/send/publications`)
+            .then((res) => res.json())
+            .then((data) => {
+                console.log(data);
+                alert("Publicaciones enviadas");
+            })
+            .catch((err) => console.log(err));
+    }
+
+    const handleUpdate = () => {
+        fetch(`http://localhost:8080/api/use/chatgpt`)
+            .then((data) => {
+                console.log(data);
+                alert("Publicaciones actualizadas");
+            })
+            .catch((err) => console.log(err));
+    }
+
+    const handleDelete = () => {
+        let userID = prompt("Ingresa el ID del usuario a dar de baja");
+
+        fetch(`http://localhost:8080/api/user/${userID}`,{
+            method: 'DELETE',
+        })
+            .then((res) => res.json())
+            .then((data) => {
+                console.log(data.data);
+                alert("Usuario dado de baja");
+            })
+            .catch((err) => console.log(err));
+    }
     
     return (
         (user === null) ?
@@ -47,6 +90,26 @@ export default function page(){
             <p>Last Name: {user.last_name}</p>
             <p>Email: <a href="mailto:{user.email}">{user.email}</a></p>
             <Button onClick={() => handleCloseSession()}>Cerrar Sesión</Button>
+            <hr />
+            { user.ID === 1 ? 
+            <React.Fragment>
+            
+                <Button>Admin Dashboard</Button>
+                
+                <div style={{display: "flex", alignItems: "center", justifyContent: "center", flexDirection: "row"}}>
+                    <div style={{display: "flex", flexDirection: "column"}}>
+                        <Button onClick={() => handlePubs()}>Obtener publicaciones</Button>
+                        <Button onClick={() => handleSends()}>Enviar por correo la publicacion</Button>
+                    </div>
+                    <div style={{display: "flex", flexDirection: "column"}}>
+                        <Button onClick={() => handleUpdate()}>Actualizar la publicacion con GPT</Button>
+                        <Button onClick={() => handleDelete()}>Dar de baja usuario</Button>
+                    </div>
+                </div>
+                
+                
+            </React.Fragment>
+            : null }
         </section>
       );
 }
