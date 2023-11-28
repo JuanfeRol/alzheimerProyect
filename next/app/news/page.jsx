@@ -2,11 +2,16 @@
 
 import * as React from "react"; 
 import styles from './styles.css'
+import Pubs from "./components/pubs";
 import { useRouter } from "next/navigation";
 
 export default function page(){
     const [publications, setPublications] = React.useState(null);
     const router = useRouter();
+
+    const handleRedirect = (publication) => {
+        router.push(publication.doi_link);
+    }
 
     React.useEffect(() => {
         console.log("News page");
@@ -23,10 +28,6 @@ export default function page(){
             })
             .catch((err) => console.log(err));
     }, []);
-
-    const handleRedirect = (publication) => {
-        router.push(publication.doi_link);
-    }
     
     return (
         (publications === null) ?
@@ -52,29 +53,9 @@ export default function page(){
                         </p>
                     </div>
                 </div>
-                {publications.map((_, index) => 
-                    {
-                        let validacion = index % 2 == 0 ? `<div className="news_section">` : "";
-                        let validacion2 = index % 1 == 0 ? `</div>` : "";
-                        let current = publications[index+1];
-                        return (
-                            <React.Fragment>
-                                <div dangerouslySetInnerHTML={{ __html: validacion }}></div>
-                                <div className="card" href="google.com" onClick={() => handleRedirect(current)}>
-                                    <figure>
-                                        <img src="/Images/Home2.jpg" alt="aaa" />
-                                    </figure>
-                                    <div className="contenido">
-                                        <p className="date">{publications[index+1] && publications[index+1].CreatedAt.toString().substring(0,10)}</p>
-                                        <h3 className="new_title">{publications[index+1] && publications[index+1].title}</h3>
-                                        <p className="category">{publications[index+1] && publications[index+1].abstract}</p>
-                                    </div>
-                                </div>
-                                <div dangerouslySetInnerHTML={{ __html: validacion2 }}></div>
-                            </React.Fragment>
-                            )
-                    }
-                )}
+                <div className="news_section">
+                    {publications.map((publication, index) => <Pubs publication={publication} index={index} />)}
+                </div>
             </section>
         </section>
       );

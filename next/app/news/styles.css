@@ -59,9 +59,10 @@ hr{
 }
 
 .news_section{
-    display: flex;
-    width: 100%;
-    box-sizing: border-box;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-gap: 20px;
+    padding: 20px;
 }
 
 .card{
