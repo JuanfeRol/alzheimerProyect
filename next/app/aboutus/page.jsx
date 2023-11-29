@@ -16,12 +16,8 @@ export default function AboutUs() {
       <div className={styles.news_section}>
         <Box>
           <div className={styles.card}>
-            <p className={styles.date}>12 Jun 23</p>
-            <h3 className={styles.news_title}>How to sell drugs online</h3>
-          </div>
-          <div className={styles.card}>
-            <p className={styles.date}>12 Jun 23</p>
-            <h3 className={styles.news_title}>How to sell drugs online</h3>
+            <h3 className={styles.date}>12 Jun 23</h3>
+            <p className={styles.news_title}>How to sell drugs online</p>
           </div>
         </Box>
       </div>
