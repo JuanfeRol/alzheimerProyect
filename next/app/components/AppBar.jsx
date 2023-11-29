@@ -52,7 +52,7 @@ function ResponsiveAppBar() {
     }
 
     if (index == 2) {
-      router.push('/aboutus');
+      router.push('/contact');
     }
   };
 
