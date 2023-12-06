@@ -19,7 +19,7 @@ export default function page(){
         const userID = user.split('=')[1];
         console.log("User ID: " + userID);
 
-        fetch(`http://localhost:8080/api/user/${userID}`)
+        fetch(`http://alzproject.ddns.net/api/user/${userID}`)
             .then((res) => res.json())
             .then((data) => {
                 console.log(data.data);
@@ -34,7 +34,7 @@ export default function page(){
     }
 
     const handlePubs = () => {
-        fetch(`http://localhost:8080/api/use/scrapper`)
+        fetch(`http://alzproject.ddns.net/api/use/scrapper`)
             .then((res) => res.json())
             .then((data) => {
                 console.log(data);
@@ -44,7 +44,7 @@ export default function page(){
     }
 
     const handleSends = () => {
-        fetch(`http://localhost:8080/api/send/publications`)
+        fetch(`http://alzproject.ddns.net/api/send/publications`)
             .then((res) => res.json())
             .then((data) => {
                 console.log(data);
@@ -54,7 +54,7 @@ export default function page(){
     }
 
     const handleUpdate = () => {
-        fetch(`http://localhost:8080/api/use/chatgpt`)
+        fetch(`http://alzproject.ddns.net/api/use/chatgpt`)
             .then((data) => {
                 console.log(data);
                 alert("Publicaciones actualizadas");
@@ -65,7 +65,7 @@ export default function page(){
     const handleDelete = () => {
         let userID = prompt("Ingresa el ID del usuario a dar de baja");
 
-        fetch(`http://localhost:8080/api/user/${userID}`,{
+        fetch(`http://alzproject.ddns.net/api/user/${userID}`,{
             method: 'DELETE',
         })
             .then((res) => res.json())

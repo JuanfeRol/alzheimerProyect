@@ -1,0 +1,22 @@
+version: '3'
+
+services:
+  docs: 
+    build:
+      context: ./
+      dockerfile: Dockerfile
+    image: gin:0.0.6
+    container_name: gin
+    labels:
+      - traefik.frontend.rule=Host:alzproject.ddns.net,www.alzproject.ddns.net;PathPrefix:/api
+      - traefik.port=8080
+      - traefik.enable=true
+    restart: unless-stopped
+    networks:
+      traefik_n:
+networks:
+  traefik_n:
+    name: traefik_n
+    driver: bridge
+
+

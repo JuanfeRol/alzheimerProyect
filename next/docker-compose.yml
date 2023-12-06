@@ -1,0 +1,22 @@
+version: '3'
+
+services:
+    nextjs:
+        build:
+            context: ./
+            dockerfile: Dockerfile
+        image: nextjs:0.0.1
+        container_name: nextjs
+        restart: unless-stopped
+        labels:
+            - traefik.frontend.rule=Host:alzproject.ddns.net,www.alzproject.ddns.net
+            - traefik.port=3000
+            - traefik.enable=true
+        ports:
+            - 3000:3000
+        networks:
+            - traefik_n
+networks:
+    traefik_n:
+        name: traefik_n
+        driver: bridge

@@ -142,7 +142,7 @@ func MailEndpoint(router *gin.RouterGroup, dataBase *gorm.DB) {
 		from := SMTP_ACC
 		to := emails
 		subject := "New Alzheimer's publication!"
-		message := publication.Body
+		message := publication.Description
 
 		// Crea el cuerpo del mensaje
 		body := "From: " + from + "\r\n" +

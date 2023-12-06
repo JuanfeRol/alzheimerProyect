@@ -49,7 +49,7 @@ export default function SignIn() {
     console.log(data.get('email'));
     console.log(data.get('password'));
 
-    fetch('http://localhost:8080/api/login', {
+    fetch('http://alzproject.ddns.net/api/login', {
       method: 'POST',
       body: JSON.stringify({
         email: data.get('email'),

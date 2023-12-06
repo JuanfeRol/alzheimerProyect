@@ -88,7 +88,7 @@ export default function page(){
         password: data.get('password'),
       });
 
-      fetch("http://localhost:8080/api/create-user", {
+      fetch("http://alzproject.ddns.net/api/create-user", {
         method: "POST",
         body: JSON.stringify({
           name: data.get('firstName'),

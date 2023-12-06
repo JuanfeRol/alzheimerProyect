@@ -13,7 +13,7 @@ import (
 
 // Funcion encargada de generar "description"
 func GenerateDescription(abs string) (des string, err error) {
-	client := openai.NewClient("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")
+	client := openai.NewClient("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")
 	resp, err := client.CreateChatCompletion(
 		context.Background(),
 		openai.ChatCompletionRequest{

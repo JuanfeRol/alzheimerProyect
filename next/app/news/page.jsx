@@ -15,7 +15,7 @@ export default function page(){
 
     React.useEffect(() => {
         console.log("News page");
-        fetch(`http://localhost:8080/api/publications`)
+        fetch(`http://alzproject.ddns.net/api/publications`)
             .then((res) => res.json())
             .then((data) => {
                 console.log(data);
